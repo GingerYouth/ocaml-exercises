@@ -1,0 +1,29 @@
+# Ignore build artifacts
+_build/
+*.cm*        # Compiled OCaml files (bytecode, native code, etc.)
+*.o          # Object files
+*.a          # Static libraries
+*.cmi        # Compiled interface files
+*.cmo        # Compiled bytecode files
+*.cma        # Compiled library files
+*.cmx        # Compiled native code object files
+*.cmxa       # Compiled native code library files
+*.o*         # Object files with extensions
+*.out        # Output files (like compiled executables)
+
+# Ignore OCaml's default build files (e.g., when using dune)
+.dune
+.dune-debug/
+
+# Ignore logs and temporary files
+*.log        # Log files (could be useful to keep for debugging, but usually not needed in the repo)
+*.bak        # Backup files
+
+# Ignore editor-specific files
+.vscode/      # Visual Studio Code settings
+.idea/        # IntelliJ IDEA / JetBrains IDEs
+*.swp         # Vim swap files
+*~            # Temporary backup files (e.g., Emacs, Vim, etc.)
+
+# Ignore opam-specific files
+.opam         # OPAM lock files (can be useful to keep, but often ignored if not working with opam directly)
