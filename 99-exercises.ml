@@ -55,4 +55,30 @@ in
 rev (encode 0 [] list)
 ;;
 
+type 'a rle =
+  | One of 'a
+  | Many of int * 'a
+;;
+
+let encode_modified list = 
+  let constructor count value = 
+    if count = 1 then One value else Many (count, value)
+  in
+  let rec encode count result = function
+    | [] -> []
+    | [x] -> constructor 1 x :: result
+    | h1 :: (h2 :: _ as t) -> 
+      if h1 = h2 then 
+        encode (count + 1) result t
+      else
+        encode 0 (constructor (count + 1) h1 :: result) t
+in 
+rev (encode 0 [] list)
+;;
+
+let rec duplicate = function
+  | [] -> []
+  | h :: t -> h :: h :: duplicate t
+;;
+
 
