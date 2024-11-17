@@ -1,0 +1,18 @@
+opam-version: "2.0"
+name: "ocaml_exercises"
+version: "0.1"
+synopsis: "A project for different OCaml exercises"
+maintainer: "parmalat35@live.com"
+authors: "https://github.com/GingerYouth"
+license: "MIT"
+homepage: "https://github.com/GingerYouth/ocaml-exercises"
+dev-repo: "git+https://github.com/GingerYouth/ocaml-exercises.git"
+bug-reports: "https://github.com/GingerYouth/ocaml-exercises/issues"
+depends: [
+  "dune" {>= "3.0"}
+  "ocaml" {>= "4.12"}
+  "cohttp"
+  "cohttp-lwt-unix"
+  "lambdasoup"
+  "lwt"
+]

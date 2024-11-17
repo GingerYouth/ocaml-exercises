@@ -1,4 +1,4 @@
-(* https://ocaml.org/exercises *)
+(* Exercises from official website: https://ocaml.org/exercises *)
 
 (* Beginner *)
 let rec last = function
@@ -10,7 +10,7 @@ let rec last = function
 let rec last_two = function
   | [] | [_] -> None
   | [x; y] -> Some (x, y)
-  | h :: t -> last_two t
+  | _ :: t -> last_two t
 ;;
 
 exception IndexOutOfBounds of string
@@ -80,5 +80,4 @@ let rec duplicate = function
   | [] -> []
   | h :: t -> h :: h :: duplicate t
 ;;
-
 
