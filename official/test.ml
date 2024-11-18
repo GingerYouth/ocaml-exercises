@@ -1,27 +1,37 @@
-open Alcotest
+open Exercises
 
-(* The tests *)
-let test_last () =
-  Alcotest.(check string) "d" (Exercises.last ["a" ; "b" ; "c" ; "d"])
+(* Test cases *)
+let test_last_1 () =
+  match last ["a"; "b"; "c"; "d"] with
+  | Some value -> Alcotest.(check string) "Tail of a List" "d" value
+  | None -> Alcotest.fail "Expected Some value but got None"
+;;
+
+let test_last_2 () =
+  match last [] with
+  | Some _ -> Alcotest.fail "Expected None but got Some value"
+  | None -> ()
+;;
+
+let test_last_two_1 () =
+  match last_two ["a"; "b"; "c"; "d"] with
+  | Some (value1, value2) -> Alcotest.(check (pair string string)) "Last Two Elements of a List" ("c", "d") (value1, value2)
+  | None -> Alcotest.fail "Expected Some value but got None"
+;;
+
+let test_last_two_2 () =
+  match last_two ["a"] with
+  | Some (_, _) -> Alcotest.fail "Expected None but got Some value"
+  | None -> ()
 ;;
 
 (* Run it *)
 let () =
   let open Alcotest in
   run "Utils" [
-      "last", [ test_case "Tail of a List" `Quick test_last  ];
+    "last_1", [ test_case "Tail of a List" `Quick test_last_1 ];
+    "last_2", [ test_case "Tail of an empty list" `Quick test_last_2 ];
+    "last_two_1", [ test_case "Last Two Elements of a List" `Quick test_last_two_1 ];
+    "last_two_2", [ test_case "Last Two Elements of a 1-element list" `Quick test_last_two_2 ];
   ]
-(* 
-let test_last () =
-  let input = [1; 2; 3; 4] in
-  let expected = Some 4 in
-  let result = last input in
-  match result with
-  | Some r when Some r = expected -> 
-      Printf.printf "test_last PASSED\n"
-  | Some r -> 
-      Printf.printf "test_last FAILED: Expected %d, but got %d\n" (match expected with Some v -> v | None -> -1) r
-  | None -> 
-      Printf.printf "test_last FAILED: Expected Some %d, but got None\n" (match expected with Some v -> v | None -> -1)
-
-let () = test_last () *)
+;;
