@@ -47,6 +47,23 @@ let test_reverse () =
   let module M = Alcotest in
   M.(check (list string)) "Reverse a List" ["c"; "b"; "a"] (rev ["a"; "b"; "c"])
 
+let test_split1 () =
+  match split ["a"; "b"; "c"; "d"; "e"; "f"; "g"; "h"; "i"; "j"] 3 with 
+  | (first_part, second_part) -> 
+      Alcotest.(check (pair (list string) (list string))) 
+        "Split a List Into Two Parts" 
+        (["a"; "b"; "c"], ["d"; "e"; "f"; "g"; "h"; "i"; "j"]) 
+        (first_part, second_part)
+
+let test_split2 () =
+  match split ["a"; "b"; "c"; "d"] 5 with 
+  | (first_part, second_part) -> 
+      Alcotest.(check (pair (list string) (list string))) 
+        "Split a List Into Two Parts" 
+        (["a"; "b"; "c"; "d"], []) 
+        (first_part, second_part)
+
+
 (* Run it *)
 let () =
   let open Alcotest in
@@ -60,4 +77,6 @@ let () =
     "length_1", [ test_case "Length of a List" `Quick test_length_1 ];
     "length_2", [ test_case "Length of a List" `Quick test_length_2 ];
     "reverse", [ test_case "Reverse a List" `Quick test_reverse ];
+    "split_1", [ test_case "Split a List Into Two Parts" `Quick test_split1];
+    "split_2", [ test_case "Split a List Into Two Parts" `Quick test_split2];
   ]
